@@ -2,7 +2,7 @@
 A wide purpose tokenizer for JavaScript. The interface follows more or less
 the WriteStream from [node.js](http://nodejs.org).
 
-node-tokenizer is published on npm to you can install it with
+node-tokenizer is published on npm so you can install it with
     npm install tokenizer
 
 ## How to
@@ -11,7 +11,7 @@ node-tokenizer is published on npm to you can install it with
 * construct one (we'll see what the callback is used for)
         var t = new Tokenizer(mycallback);
 * add rules
-        t.addRule(/myawesome regex/, 'type');
+        t.addRule(/^my regex$/, 'type');
 * write or pump to it
         t.write(data);
         // or
@@ -49,7 +49,7 @@ string that contains what you specified, this could be the whole file!
 
 ## To do
 * a lot of optimisation
-* being able to share rules across several tokenizer 
-    (although this can be achieved with inheritance)
+* being able to share rules across several tokenizers
+    (although this can be achieved through inheritance)
 * probably more hooks
 * more checking
