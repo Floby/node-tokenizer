@@ -43,6 +43,10 @@ The tokenizer tries to find the longest string matching one or more rules.
 When several rules match the same string, priority is given to the rule
 which was added first. (this may change)
 
+Please note that your regular expressions should use ^ and $ in order
+to test the whole string. If these are not used, you rule will match _every_
+string that contains what you specified, this could be the whole file!
+
 ## To do
 * a lot of optimisation
 * being able to share rules across several tokenizer 
