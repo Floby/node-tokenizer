@@ -32,6 +32,8 @@ and match, an object like this
         type: 'type' // the type of the token
     }
 
+Have a look in the example folder
+
 ## Rules
 rules are regular expressions associated with a type name.
 The tokenizer tries to find the longest string matching one or more rules.
