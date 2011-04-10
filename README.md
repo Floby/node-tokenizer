@@ -7,15 +7,15 @@ node-tokenizer is published on npm to you can install it with
 
 ## How to
 * require the Tokenizer constructor
-    var Tokenizer = require('tokenizer');
+        var Tokenizer = require('tokenizer');
 * construct one (we'll see what the callback is used for)
-    var t = new Tokenizer(mycallback);
+        var t = new Tokenizer(mycallback);
 * add rules
-    t.addRule(/myawesome regex/, 'type');
+        t.addRule(/myawesome regex/, 'type');
 * write or pump to it
-    t.write(data);
-    // or
-    stream.pipe(t);
+        t.write(data);
+        // or
+        stream.pipe(t);
 * listen for new tokens
         t.on('token', function(token, type) {
             // do something useful
@@ -24,7 +24,7 @@ node-tokenizer is published on npm to you can install it with
         })
         // alternatively you can listen on the 'data' event
 * look out for the end
-    t.on('end', callback);
+        t.on('end', callback);
 
 the optional callback argument for the constructor is a function that will
 be called for each token in order to specify a different type by returning
