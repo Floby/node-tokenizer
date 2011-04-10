@@ -1,5 +1,5 @@
 # Synopsis
-A wide purpose tokenizer for JavaScript. The interface follow more or less
+A wide purpose tokenizer for JavaScript. The interface follows more or less
 the WriteStream from [node.js](http://nodejs.org).
 
 ## How to
