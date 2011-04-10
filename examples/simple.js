@@ -1,4 +1,4 @@
-var Tokenizer = require('./Tokenizer');
+var Tokenizer = require('../lib/Tokenizer');
 var t = new Tokenizer(function(token, match) {
     // change the type of the token before emitting it
     if(match.type == 'word' && token == "coucou") return "coucou";

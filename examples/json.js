@@ -1,4 +1,4 @@
-var Tokenizer = require('./Tokenizer');
+var Tokenizer = require('../lib/Tokenizer');
 var t = new Tokenizer();
 t.on('token', function(token, type) {
     console.log('%s(%s)', token, type);
