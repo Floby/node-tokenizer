@@ -6,24 +6,36 @@ node-tokenizer is published on npm so you can install it with
     npm install tokenizer
 
 ## How to
+
 * require the Tokenizer constructor
+
             var Tokenizer = require('tokenizer');
+
 * construct one (we'll see what the callback is used for)
+
             var t = new Tokenizer(mycallback);
+
 * add rules
+
             t.addRule(/^my regex$/, 'type');
+
 * write or pump to it
+
             t.write(data);
             // or
             stream.pipe(t);
+
 * listen for new tokens
+
             t.on('token', function(token, type) {
                 // do something useful
                 // type is the type of the token (specified with addRule)
                 // token is the actual matching string
             })
             // alternatively you can listen on the 'data' event
+
 * look out for the end
+
             t.on('end', callback);
 
 the optional callback argument for the constructor is a function that will
