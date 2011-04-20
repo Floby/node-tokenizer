@@ -8,9 +8,9 @@ node-tokenizer is published on npm so you can install it with
 ## How to
 
 * require the Tokenizer constructor
-            ``` javascript
-            var Tokenizer = require('tokenizer');
-            ```
+``` javascript
+var Tokenizer = require('tokenizer');
+```
 
 * construct one (we'll see what the callback is used for)
 
