@@ -14,9 +14,9 @@ var Tokenizer = require('tokenizer');
 
 * construct one (we'll see what the callback is used for)
 
-            ``` javascript
-            var t = new Tokenizer(mycallback);
-            ``` 
+``` javascript
+var t = new Tokenizer(mycallback);
+``` 
 
 * add rules
 
