@@ -55,10 +55,12 @@ be called for each token in order to specify a different type by returning
 a string. The parameters passed to the function are token(the token that we found)
 and match, an object like this 
 
-    {
-        regex: /whatever/ // the regex that matched the token
-        type: 'type' // the type of the token
-    }
+``` javascript
+{
+    regex: /whatever/ // the regex that matched the token
+    type: 'type' // the type of the token
+}
+```
 
 Have a look in the example folder
 
