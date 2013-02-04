@@ -1,9 +1,14 @@
+{% if site.submenu_base_url != NULL %}
+    {% assign base_url = site.submenu_base_url %}
+{% else %}
+    {% assign base_url = site.url %}
+{% endif %}
 <ul class="nav nav-tabs">
     {% for item in site.submenu %}
         {% if item.slug == page.submenu_item %}
-            <li class="active"><a href="{{ site.url }}{{ item.link }}">{{ item.name }}</a></li>
+            <li class="active"><a href="{{ base_url }}{{ item.link }}">{{ item.name }}</a></li>
         {% else %}
-            <li><a href="{{ site.url }}{{ item.link }}">{{ item.name }}</a></li>
+            <li><a href="{{ base_url }}{{ item.link }}">{{ item.name }}</a></li>
         {% endif %}
     {% endfor %}
 </ul>
