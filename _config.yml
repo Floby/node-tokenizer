@@ -7,6 +7,7 @@ permalink: pretty
 paginate: 5
 
 project: Parsing streams
+project_image: /images/oav.gif
 menu_item: projects
 title: Node.js Parsing streams
 
