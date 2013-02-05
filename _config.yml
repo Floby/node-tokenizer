@@ -1,10 +1,32 @@
-url: "http://www.flo.by"
+url: "http://projects.flo.by/node-tokenizer"
 pygments: true
 exclude: [/bin, Gemfile, Gemfile.lock]
 markdown: kramdown
 #markdown: rdiscount
 permalink: pretty
 paginate: 5
+
+project: Parsing streams
+menu_item: projects
+title: Node.js Parsing streams
+
+submenu_base_url: ''
+submenu:
+    - slug: home
+      name: Home
+      link: /
+
+    - slug: tokenizer
+      name: Tokenizer
+      link: /node-tokenizer
+
+    - slug: parser
+      name: Parser
+      link: /node-parser
+    
+    - slug: json-streams
+      name: JSON Streams
+      link: /node-json-streams
 
 kramdown:
   entity_output: symbolic
