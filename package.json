@@ -1,7 +1,7 @@
 {
   "name": "tokenizer",
   "description": "A wide purpose tokenizer for node.js which looks like a stream",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "http://github.com/floby/node-tokenizer",
   "repository": {
     "type": "git",
