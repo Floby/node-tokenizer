@@ -36,7 +36,7 @@ exports['test emits error when no rules'] = function (test) {
 
 exports['test ignore tokens'] = function(test) {
   var t = tokenizer();
-  t.addRule(/^(\s)+$/, 'whitespace');
+  t.addRule('whitespace');
   t.ignore('whitespace');
   test.expect(0);
   t.on('data', test.fail.bind(test, "We should not get any data"));
@@ -47,9 +47,9 @@ exports['test ignore tokens'] = function(test) {
 exports['test numbers'] = function(test) {
   var numbers = [8, 1000, 34.5];
   var t = tokenizer();
-  t.addRule(/^\d+(\.\d+)?$/, 'number');
+  t.addRule('number');
   t.addRule(/^\d+\.$/, 'maybe-float');
-  t.addRule(/^(\s)+$/, 'whitespace');
+  t.addRule('whitespace');
   t.ignore('whitespace');
   test.expect(3 * 2);
   t.on('data', function(token) {
@@ -63,9 +63,9 @@ exports['test numbers'] = function(test) {
 exports['test comma separated numbers'] = function(test) {
   var numbers = [8, 1000, 34.5];
   var t = tokenizer();
-  t.addRule(/^\d+(\.\d+)?$/, 'number');
+  t.addRule('number');
   t.addRule(/^\d+\.$/, 'maybe-float');
-  t.addRule(/^(\s)+$/, 'whitespace');
+  t.addRule('whitespace');
   t.addRule(/^,$/, 'comma');
   t.ignore('whitespace');
   t.ignore('comma');
@@ -83,7 +83,7 @@ exports['test citation'] = function(test) {
   var t = tokenizer();
   t.addRule(/^"([^"]|\\")*"$/, 'string');
   t.addRule(/^"([^"]|\\")*$/, 'maybe-string'); // same as above without the ending "
-  t.addRule(/^(\s)+$/, 'whitespace');
+  t.addRule('whitespace');
   t.ignore('whitespace');
   test.expect(1 * 2);
   t.on('data', function(token) {
@@ -100,7 +100,7 @@ exports['test pipe separated citations'] = function(test) {
   t.addRule(/^"([^"]|\\")*"$/, 'string');
   t.addRule(/^"([^"]|\\")*$/, 'maybe-string'); // same as above without the ending "
   t.addRule(/^\|$/, 'pipe');
-  t.addRule(/^(\s)+$/, 'whitespace');
+  t.addRule('whitespace');
   t.ignore('whitespace');
   t.ignore('pipe');
   test.expect(3 * 2);
