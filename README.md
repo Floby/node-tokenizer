@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Floby/node-tokenizer.png)](https://travis-ci.org/Floby/node-tokenizer)
+
 # Synopsis
 A wide purpose tokenizer for JavaScript. The interface follows more or less
 the WriteStream from [node.js](http://nodejs.org).
