@@ -52,8 +52,8 @@ exports['test numbers'] = function(test) {
   t.addRule(/^(\s)+$/, 'whitespace');
   t.ignore('whitespace');
   test.expect(3 * 2);
-  t.on('data', function(token, type) {
-    test.equal('number', type);
+  t.on('data', function(token) {
+    test.equal('number', token.type);
     test.equal(token , numbers.shift(), "We should get the values we input");
   });
   t.on('end', test.done.bind(test));
@@ -70,8 +70,8 @@ exports['test comma separated numbers'] = function(test) {
   t.ignore('whitespace');
   t.ignore('comma');
   test.expect(3 * 2);
-  t.on('data', function(token, type) {
-    test.equal('number', type);
+  t.on('data', function(token) {
+    test.equal('number', token.type);
     test.equal(token , numbers.shift(), "We should get the values we input");
   });
   t.on('end', test.done.bind(test));
@@ -86,8 +86,8 @@ exports['test citation'] = function(test) {
   t.addRule(/^(\s)+$/, 'whitespace');
   t.ignore('whitespace');
   test.expect(1 * 2);
-  t.on('data', function(token, type) {
-    test.equal('string', type);
+  t.on('data', function(token) {
+    test.equal('string', token.type);
     test.equal(token , JSON.stringify(string), "We should get the values we input");
   });
   t.on('end', test.done.bind(test));
@@ -104,8 +104,8 @@ exports['test pipe separated citations'] = function(test) {
   t.ignore('whitespace');
   t.ignore('pipe');
   test.expect(3 * 2);
-  t.on('data', function(token, type) {
-    test.equal('string', type);
+  t.on('data', function(token) {
+    test.equal('string', token.type);
     test.equal(token , JSON.stringify(strings.shift()), "We should get the values we input");
   });
   t.on('end', test.done.bind(test));
