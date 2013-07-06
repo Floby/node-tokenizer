@@ -111,3 +111,20 @@ exports['test pipe separated citations'] = function(test) {
   t.on('end', test.done.bind(test));
   t.end(strings.map(JSON.stringify).join('|'));
 }.withDomain();
+
+exports['words in two chunks'] = function(test) {
+  var strings = ["Hello", "World"];
+  var t = tokenizer();
+  t.addRule('word');
+  t.addRule('whitespace');
+  t.ignore('whitespace');
+  test.expect(2 * 2);
+  t.on('data', function(token) {
+    console.log('got token', token)
+    test.equal('word', token.type);
+    test.equal(token , strings.shift(), "We should get the values we input");
+  });
+  t.on('end', test.done.bind(test));
+  t.write('Hell');
+  t.end('o World');
+}.withDomain();
