@@ -53,12 +53,14 @@ exports['test numbers'] = function(test) {
   t.ignore('whitespace');
   test.expect(3 * 2);
   t.on('data', function(token) {
+    console.log('got token', token, token.type)
     test.equal('number', token.type);
     test.equal(token , numbers.shift(), "We should get the values we input");
   });
   t.on('end', test.done.bind(test));
   t.end(numbers.join(' '));
 }.withDomain();
+
 
 exports['test comma separated numbers'] = function(test) {
   var numbers = [8, 1000, 34.5];
