@@ -42,7 +42,7 @@ t.on('token', function(token, type) {
     // type is the type of the token (specified with addRule)
     // token is the actual matching string
 })
-// alternatively you can listen on the 'data' event
+// alternatively you can use the tokenizer as a readable stream.
 ```
 
 * look out for the end
