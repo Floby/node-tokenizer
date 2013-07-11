@@ -53,7 +53,6 @@ exports['test numbers'] = function(test) {
   t.ignore('whitespace');
   test.expect(3 * 2);
   t.on('data', function(token) {
-    console.log('got token', token, token.type)
     test.equal('number', token.type);
     test.equal(token , numbers.shift(), "We should get the values we input");
   });
@@ -122,7 +121,6 @@ exports['words in two chunks'] = function(test) {
   t.ignore('whitespace');
   test.expect(2 * 2);
   t.on('data', function(token) {
-    console.log('got token', token)
     test.equal('word', token.type);
     test.equal(token , strings.shift(), "We should get the values we input");
   });

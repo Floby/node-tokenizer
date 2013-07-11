@@ -10,7 +10,7 @@
   "author": "Florent Jaby <florent.jaby@gmail.com>",
   "main": "lib/Tokenizer.js",
   "scripts": {
-    "test": "nodeunit test/test-*.js"
+    "test": "nodeunit test/test-tokenizer.js"
   },
   "directories": {
     "lib": "lib"
