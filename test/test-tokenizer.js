@@ -34,6 +34,21 @@ exports['test emits error when no rules'] = function (test) {
   t.end('Hello World!');
 }.withDomain()
 
+exports['calling toString on tokens'] = function (test) {
+  var t = tokenizer();
+  t.addRule('number');
+  t.addRule('whitespace');
+  test.expect(3 * 2);
+  t.on('data', function(token, type) {
+    test.doesNotThrow(function () {
+      token.toString();
+    });
+    test.equal(token.content, token.toString());
+  });
+  t.on('end', test.done.bind(test));
+  t.end('8 10');
+}
+
 exports['test ignore tokens'] = function(test) {
   var t = tokenizer();
   t.addRule('whitespace');
@@ -43,6 +58,37 @@ exports['test ignore tokens'] = function(test) {
   t.on('end', test.done.bind(test));
   t.end(' \n\r\t');
 }.withDomain();
+
+exports['test ignore array of tokens'] = function(test) {
+  var t = tokenizer();
+  t.addRule('whitespace');
+  t.addRule('number');
+  t.ignore(['whitespace', 'number']);
+  test.expect(0);
+  t.on('data', test.fail.bind(test, "We should not get any data"));
+  t.on('end', test.done.bind(test));
+  t.end('8 67\n45\t10000');
+}.withDomain();
+
+
+exports['add built-in rules by name'] = function (test) {
+  var t = tokenizer();
+  test.expect(1);
+  t.on('token', function(token, type) {
+    test.equal('whitespace', type);
+    test.done();
+  });
+  t.addRule('whitespace');
+  t.end(' ');
+}
+
+exports['call addRule with no arguments throws'] = function (test) {
+  var t = tokenizer();
+  test.throws(function () {
+    t.addRule();
+  });
+  test.done();
+}
 
 exports['test numbers'] = function(test) {
   var numbers = [8, 1000, 34.5];
