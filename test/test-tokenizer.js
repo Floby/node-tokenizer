@@ -173,3 +173,26 @@ exports['words in two chunks'] = function(test) {
   t.write('Hell');
   t.end('o World');
 }.withDomain();
+
+exports['verify regex priority order and that longest matches first'] = function(test) {
+  //Test case built for a tokenizer I was building that was supposed to parse SLIM template code but was not working.
+  var t = tokenizer(undefined, {split: /^\r?\n+$/});
+  t.addRule(/^([a-zA-Z0-9\-_]+\s*=\s*)(["'])(\\\2|[^"']+)*?\2$/, 'tKeyValue');  // name='value'
+  t.addRule(/^[a-zA-Z0-9\-_]+$/, 'tIdentifier');                                // name
+  t.addRule(/^[#][a-zA-Z0-9\-_]+$/, 'tIdName');                                 // #name
+  t.addRule(/^\.[a-zA-Z0-9\-_]+$/, 'tClassName');                               // .name
+  t.addRule('whitespace');
+  t.ignore('whitespace');
+
+  var expectations = ['tIdentifier', 'tIdName', 'tClassName', 'tKeyValue', 'tKeyValue'];
+
+  t.on('data', function(token) {
+    var e = expectations.shift();
+
+    test.equal(e, token.type);
+  });
+  
+  t.on('end', test.done.bind(test));
+  t.write('tag#id.class var1 = \'value1\' var2 = \'value2\'');
+  t.end();
+}.withDomain();
