@@ -16,7 +16,6 @@ Function.prototype.withDomain = function(withStack) {
   }
 }
 
-
 exports['test empty'] = function(test) {
   var t = tokenizer();
   t.on('data', test.fail.bind(test, "No data should be emitted"));

@@ -42,14 +42,12 @@ Function.prototype.timed = function (timeout) {
   }
 }
 
-
-
 exports['test big file of small integers'] = function (test) {
   var numbers = [0];
   for (var i = 0; i < 100000; ++i) {
     numbers.push(Math.floor(Math.random() * 10000));
   };
-  var t = tokenizer();
+  var t = tokenizer(undefined, {split: ','});
   t.addRule('number');
   t.addRule(/^\d+\.$/, 'maybe-float');
   t.addRule('whitespace');

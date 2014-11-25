@@ -20,8 +20,5 @@
   },
   "devDependencies": {
     "nodeunit": "~0.8.1"
-  },
-  "dependencies": {
-    "disect": "~1.1.0"
   }
 }
