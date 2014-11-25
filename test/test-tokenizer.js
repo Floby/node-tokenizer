@@ -174,3 +174,28 @@ exports['words in two chunks'] = function(test) {
   t.write('Hell');
   t.end('o World');
 }.withDomain();
+
+exports["quoted string"] = function(test) {
+    var t = tokenizer();
+    t.addRule(/^\#.*?$/, "comment");
+    t.addRule('whitespace');
+    t.addRule(/^\d+$/, 'integer');
+    t.addRule(/^".*?"$/, "quoted-string");
+    t.addRule(/^\;$/, 'end-statement');
+    t.addRule(/^\=$/, 'assignment');
+    t.addRule(/^(int16|int32|string)$/, 'data-type');
+    t.addRule(/^[a-zA-Z0-9_]+$/, 'symbol');
+    t.ignore(['comment','whitespace']);
+
+    var idx = 0;
+    var expect = ['data-type','symbol','assignment','integer','end-statement','data-type','symbol','assignment','quoted-string','end-statement'];
+    var values = ['int16','ii','=','12345678901234567890',';','string','a1','=','"some long value for the quoted string"', ';'];
+    t.on('data', function(token) {
+        test.equal(expect[idx], token.type);
+        test.equal(values[idx], token.content);
+        idx += 1;
+    });
+    t.on('end', test.done.bind(test));
+    t.write('#this is a commment\n\n\tint16 ii = 12345678901234567890;\nstring a1 = "some long value for the quoted string";');
+    t.end();
+}.withDomain();
