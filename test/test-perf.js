@@ -1,10 +1,11 @@
-var tokenizer = require('../');
-var domain = require('domain');
+var tokenizer = require('../'),
+    domain = require('domain');
 
 Function.prototype.withDomain = function(withStack) {
   var fn = this;
   return function(test) {
     var d = domain.create();
+
     d.on('error', function(e) {
       test.fail('test failed with ' + e.message);
       if(withStack) {
@@ -12,6 +13,7 @@ Function.prototype.withDomain = function(withStack) {
       }
       test.done();
     });
+
     d.run(fn.bind(this, test));
   }
 }

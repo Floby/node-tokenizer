@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/Floby/node-tokenizer.png)](https://travis-ci.org/Floby/node-tokenizer)
 
 # Synopsis
-A wide purpose tokenizer for JavaScript. The interface follows more or less the WriteStream from [node.js](http://nodejs.org).
+A wide purpose tokenizer for JavaScript that tokenizes based on rules established using Regular Expressions. The interface conforms to the WriteStream from [node.js](http://nodejs.org).
 
 # Installation
 
@@ -9,25 +9,34 @@ A wide purpose tokenizer for JavaScript. The interface follows more or less the 
 
 ## How to
 
-* require the Tokenizer constructor
+**Requiring**
 
 ``` javascript
 var Tokenizer = require('tokenizer');
 ```
 
-* construct one (we'll see what the callback is used for)
+**Construction**
 
 ``` javascript
-var t = new Tokenizer(mycallback);
+var t = new Tokenizer(mycallback, options);
 ``` 
 
-* add rules
+**Setting Options**
+
+Options is an object passed to the constructor function and can contain the following properties (defaults shown inline):
+
+    {
+      stepSize: 0, // For large streams, the maximum size that will be tokenized at a time. This must be larger than the largest expected token.
+      split: undefined // See explanation in 'Splitting into Smaller Pieces'
+    }
+
+**Adding Rules**
 
 ``` javascript
 t.addRule(/^my regex$/, 'type');
 ```
 
-* add split
+**Splitting into Smaller Pieces**
 
 By default, tokenizer attempts to find the longest match in the input stream. This can be a large performance hit for big files. If you are certain that your tokens will never cross a certain type of string boundary (like ',' or \n) you can specify
 to split your input by that before tokenization which could improve performance dramatically.
@@ -38,6 +47,7 @@ t = new Tokenizer(undefined, {
   split: ','
 }); 
 ```
+
 ``` javascript
 // Break file up by lines and tokenize each line separately.
 t = new Tokenizer(undefined, {
@@ -45,7 +55,7 @@ t = new Tokenizer(undefined, {
 });
 ```
 
-* write or pump to it
+**Writing/Piping**
 
 ``` javascript
 t.write(data);
@@ -53,18 +63,18 @@ t.write(data);
 stream.pipe(t);
 ```
 
-* listen for new tokens
+**Listen for tokens**
 
 ``` javascript
 t.on('token', function(token, type) {
     // do something useful
     // type is the type of the token (specified with addRule)
     // token is the actual matching string
-})
+});
 // alternatively you can use the tokenizer as a readable stream.
 ```
 
-* look out for the end
+**Listening for completion**
 
 ``` javascript
 t.on('end', callback);
@@ -82,24 +92,32 @@ and match, an object like this
 }
 ```
 
-Have a look in the example folder
+##Examples
+
+Take a look a the [examples](https://github.com/Floby/node-tokenizer/tree/master/examples) folder.
 
 ## Rules
-rules are regular expressions associated with a type name.
+
+Rules are regular expressions associated with a type name.
+
 The tokenizer tries to find the longest string matching one or more rules.
 When several rules match the same string, priority is given to the rule
-which was added first. (this may change)
+which was added first.
 
-Please note that your regular expressions should use ^ and $ in order
+Note: normally your regular expressions should use ^ and $ in order
 to test the whole string. If these are not used, you rule will match _every_
 string that contains what you specified, this could be the whole file!
 
 ## To do
-* a lot of optimisation
-* being able to share rules across several tokenizers
-    (although this can be achieved through inheritance)
-* probably more hooks
-* more checking
+
+* Continued optimisation
+* Rule sharing across several tokenizers (although this can be achieved through inheritance)
+* Need more hooks
+* Increase test coverage
+
+## Testing
+
+Testing is provided via the 
 
 ## License
 
