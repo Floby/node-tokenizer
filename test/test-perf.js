@@ -47,7 +47,7 @@ Function.prototype.timed = function (timeout) {
 exports['test big file of small integers'] = function (test) {
   var numbers = [0];
   for (var i = 0; i < 1000000; ++i) {
-    numbers.push(Math.floor(Math.random() * 10000));
+    numbers.push(Math.floor(Math.random() * 100000));
   };
   var t = tokenizer(undefined, {split: /\,/});
   t.addRule('number');
