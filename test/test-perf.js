@@ -46,7 +46,7 @@ Function.prototype.timed = function (timeout) {
 
 exports['test big file of small integers'] = function (test) {
   var numbers = [0];
-  for (var i = 0; i < 1000000; ++i) {
+  for (var i = 0; i < 100000; ++i) {
     numbers.push(Math.floor(Math.random() * 100000));
   };
   var t = tokenizer(undefined, {split: /\,/});
@@ -55,7 +55,6 @@ exports['test big file of small integers'] = function (test) {
   t.addRule('whitespace');
   t.addRule(/^,$/, 'comma');
   t.ignore('whitespace');
-  t.ignore('comma');
   t.on('data', function(token) {
   });
   t.on('end', test.done.bind(test));
