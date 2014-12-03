@@ -27,7 +27,7 @@ Options is an object passed to the constructor function and can contain the foll
 
     {
       stepSize: 0, // For large streams, the maximum size that will be tokenized at a time. This must be larger than the largest expected token.
-      split: undefined // See explanation in 'Splitting into Smaller Pieces'
+      split: undefined // A regular expression. See explanation in 'Splitting into Smaller Pieces'
     }
 
 **Adding Rules**
@@ -38,13 +38,12 @@ t.addRule(/^my regex$/, 'type');
 
 **Splitting into Smaller Pieces**
 
-By default, tokenizer attempts to find the longest match in the input stream. This can be a large performance hit for big files. If you are certain that your tokens will never cross a certain type of string boundary (like ',' or \n) you can specify
-to split your input by that before tokenization which could improve performance dramatically.
+By default, tokenizer attempts to find the longest match in the input stream. This can be a large performance hit for big files. If you are certain that your tokens will never cross a certain type of regular expression boundary (like /\n/) you can specify to split your input by that before tokenization which could improve performance dramatically.
 
 ``` javascript
 // Break CSV into subportions and tokenize each subportion separately but in order of original input
 t = new Tokenizer(undefined, {
-  split: ','
+  split: /\,/
 }); 
 ```
 
