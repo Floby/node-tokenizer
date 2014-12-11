@@ -1,10 +1,11 @@
-var tokenizer = require('../');
-var domain = require('domain');
+var tokenizer = require('../'),
+    domain = require('domain');
 
 Function.prototype.withDomain = function(withStack) {
   var fn = this;
   return function(test) {
     var d = domain.create();
+
     d.on('error', function(e) {
       test.fail('test failed with ' + e.message);
       if(withStack) {
@@ -12,6 +13,7 @@ Function.prototype.withDomain = function(withStack) {
       }
       test.done();
     });
+
     d.run(fn.bind(this, test));
   }
 }
@@ -42,20 +44,17 @@ Function.prototype.timed = function (timeout) {
   }
 }
 
-
-
 exports['test big file of small integers'] = function (test) {
   var numbers = [0];
   for (var i = 0; i < 100000; ++i) {
-    numbers.push(Math.floor(Math.random() * 10000));
+    numbers.push(Math.floor(Math.random() * 100000));
   };
-  var t = tokenizer();
+  var t = tokenizer(undefined, {split: /\,/});
   t.addRule('number');
   t.addRule(/^\d+\.$/, 'maybe-float');
   t.addRule('whitespace');
   t.addRule(/^,$/, 'comma');
   t.ignore('whitespace');
-  t.ignore('comma');
   t.on('data', function(token) {
   });
   t.on('end', test.done.bind(test));
