@@ -1,13 +1,15 @@
 {
   "name": "tokenizer",
-  "description": "A wide purpose tokenizer for node.js which looks like a stream",
-  "version": "1.1.2",
+  "description": "A wide purpose tokenizer for node.js which extends the built-in 'stream' module.",
+  "version": "1.2.0",
   "homepage": "http://github.com/floby/node-tokenizer",
   "repository": {
     "type": "git",
     "url": "git://github.com/Floby/node-tokenizer.git"
   },
   "author": "Florent Jaby <florent.jaby@gmail.com>",
+  "contributors": [],
+  
   "main": "lib/Tokenizer.js",
   "scripts": {
     "test": "nodeunit test/test-tokenizer.js"
@@ -20,8 +22,5 @@
   },
   "devDependencies": {
     "nodeunit": "~0.8.1"
-  },
-  "dependencies": {
-    "disect": "~1.1.0"
   }
 }
